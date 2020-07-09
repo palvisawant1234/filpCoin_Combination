@@ -4,7 +4,6 @@ echo "Enter number of flips:"
 read n
 
 declare -A dict
-
 dict[H]=0
 dict[T]=0
 
@@ -40,26 +39,19 @@ done
 echo Number of times head won: ${dict[H]}
 echo Number of times tail won: ${dict[T]}
 
-val=${dict[H]}
-echo -n "Head percentage: "
-headPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $headPercent
-
-val=${dict[T]}
-echo -n "Tail percentage: "
-tailPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $tailPercent
+for i in ${!dict[@]}
+do
+val=${dict[$i]}
+echo -n "$i percentage: "
+Percent=`echo - | awk '{print '$val' / '$n' * '100' }'`
+echo $Percent
+done
 
 echo -n "Sorted combinations are: "
 readarray -t descendSortedArr < <(printf '%s\n' "${dict[@]}" | sort -r --numeric-sort)
 echo "${descendSortedArr[@]}"
-for((i=0;i<2;i++))
-do
-	if((i==0))
-	then
-		max=${descendSortedArr[i]}
-	fi
-done
+max=${descendSortedArr[0]}
+
 for i in ${!dict[@]}
 do
         if [ ${dict[$i]} -eq $max ]
@@ -82,41 +74,25 @@ do
 	esac
 done
 
-echo Number of times HH won: ${dictd[HH]}
-echo Number of times HT won: ${dictd[HT]}
-echo Number of times TH won: ${dictd[TH]}
-echo Number of times TT won: ${dictd[TT]}
+for i in ${!dictd[@]}
+do
+echo Number of times $i won: ${dictd[$i]}
+done
 
-val=${dictd[HH]}
-echo -n "HH percentage: "
-hhPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $hhPercent
-
-val=${dictd[HT]}
-echo -n "HT percentage: "
-htPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $htPercent
-
-val=${dictd[TH]}
-echo -n "TH percentage: "
-thPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $thPercent
-
-val=${dictd[TT]}
-echo -n "TT percentage: "
-ttPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $ttPercent
+for i in ${!dictd[@]}
+do
+val=${dictd[$i]}
+echo -n "$i percentage: "
+Percent=`echo - | awk '{print '$val' / '$n' * '100' }'`
+echo $Percent
+done
 
 echo -n "descending sorted array is: "
 readarray -t descendSortedArr < <(printf '%s\n' "${dictd[@]}" | sort -r --numeric-sort)
 echo "${descendSortedArr[@]}"
-for((i=0;i<4;i++))
-do
-        if((i==0))
-        then
-                max=${descendSortedArr[i]}
-        fi
-done
+
+max=${descendSortedArr[0]}
+
 for i in ${!dictd[@]}
 do
         if [ ${dictd[$i]} -eq $max ]
@@ -124,8 +100,6 @@ do
                 echo "The maximum combination $max is of : $i"
         fi
 done
-
-
 }
 
 triplet() {
@@ -144,65 +118,23 @@ do
         esac
 done
 
-echo Number of times HHH won: ${dictt[HHH]}
-echo Number of times HHT won: ${dictt[HHT]}
-echo Number of times HTH won: ${dictt[HTH]}
-echo Number of times THH won: ${dictt[THH]}
-echo Number of times TTH won: ${dictt[TTH]}
-echo Number of times THT won: ${dictt[THT]}
-echo Number of times HTT won: ${dictt[HTT]}
-echo Number of times TTT won: ${dictt[TTT]}
+for i in ${!dictt[@]}
+do
+echo Number of times $i won: ${dictt[$i]}
+done
 
-val=${dictt[HHH]}
-echo -n "HHH percentage: "
-hhhPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $hhhPercent
-
-val=${dictt[HHT]}
-echo -n "HHT percentage: "
-hhtPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $hhtPercent
-
-val=${dictt[HTH]}
-echo -n "HTH percentage: "
-hthPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $hthPercent
-
-val=${dictt[THH]}
-echo -n "THH percentage: "
-thhPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $thhPercent
-
-val=${dictt[TTH]}
-echo -n "TTH percentage: "
-tthPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $tthPercent
-
-val=${dictt[THT]}
-echo -n "THT percentage: "
-thtPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $thtPercent
-
-val=${dictt[HTT]}
-echo -n "HTT percentage: "
-httPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $httPercent
-
-val=${dictt[TTT]}
-echo -n "TTT percentage: "
-tttPercent=`echo - | awk '{print '$val' / '$n' * '100' }'`
-echo $tttPercent
+for i in ${!dictt[@]}
+do
+val=${dictt[$i]}
+echo -n "$i percentage: "
+Percent=`echo - | awk '{print '$val' / '$n' * '100' }'`
+echo $Percent
+done
 
 echo -n "descending sorted array is: "
 readarray -t descendSortedArr < <(printf '%s\n' "${dictt[@]}" | sort -r --numeric-sort)
 echo "${descendSortedArr[@]}"
-for((i=0;i<2;i++))
-do
-        if((i==0))
-        then
-                max=${descendSortedArr[i]}
-        fi
-done
+max=${descendSortedArr[0]}
 for i in ${!dictt[@]}
 do
         if [ ${dictt[$i]} -eq $max ]
@@ -210,8 +142,6 @@ do
                 echo "The maximum combination $max is of : $i"
         fi
 done
-
-
 }
 
 echo Enter your choice
